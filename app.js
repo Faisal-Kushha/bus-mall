@@ -93,6 +93,7 @@ function handleClick(event) {
         } else if (event.target.id === 'center') {
             Bus.arr[centerIndex].votes++;
 
+
         } else if (event.target.id === 'right') {
             Bus.arr[rightIndex].votes++;
 
@@ -121,6 +122,10 @@ function handlebutton(event) {
     renderList();
     charts();
     buttonElement.removeEventListener('click', handlebutton);
+
+          
+    
+
 }
 
 
