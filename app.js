@@ -91,8 +91,7 @@ let rightIndex;
 
         }else{
 
-     renderList();
-     
+     renderList(); 
  }
 }
 
