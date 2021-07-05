@@ -1,114 +1,180 @@
 'use strict';
 
-function randomIndex(){
+function randomIndex() {
     return Math.floor(Math.random() * Bus.arr.length);
 }
 
 let sectionElement = document.getElementById('one');
+let buttonElement = document.getElementById('button');
 let leftImageElement = document.getElementById('left');
 let centerImageElement = document.getElementById('center');
 let rightImageElement = document.getElementById('right');
 
 let maxAttempts = 25;
 let counter = 0;
+let arrOfObjects = [];
+let arrOfvotes = [];
+let arrOfshown = [];
 
-function Bus(name, source){
+function Bus(name, source) {
     this.name = name;
     this.source = source;
     this.votes = 0;
     this.shown = 0;
     Bus.arr.push(this);
+    arrOfObjects.push(this.name);
+
 
 }
 Bus.arr = [];
 
-new Bus('Bag','bag.jpg');
-new Bus('Banana','banana.jpg');
-new Bus('Bathroom','bathroom.jpg');
-new Bus('Boots','boots.jpg');
-new Bus('Breakfast','breakfast.jpg');
-new Bus('Bubblegum','bubblegum.jpg');
-new Bus('Chair','chair.jpg');
-new Bus('Cthulhu','cthulhu.jpg');
-new Bus('Dog-duck','dog-duck.jpg');
-new Bus('Dragon','dragon.jpg');
-new Bus('Pet-sweep','pet-sweep.jpg');
-new Bus('Pen','pen.jpg');
-new Bus('Scissors','scissors.jpg');
-new Bus('Shark','shark.jpg');
-new Bus('Sweep','sweep.png');
-new Bus('Tauntaun','tauntaun.jpg');
-new Bus('Unicorn','unicorn.jpg');
-new Bus('Water-can','water-can.jpg');
-new Bus('Wine-glass','wine-glass.jpg');
+new Bus('Bag', 'bag.jpg');
+new Bus('Banana', 'banana.jpg');
+new Bus('Bathroom', 'bathroom.jpg');
+new Bus('Boots', 'boots.jpg');
+new Bus('Breakfast', 'breakfast.jpg');
+new Bus('Bubblegum', 'bubblegum.jpg');
+new Bus('Chair', 'chair.jpg');
+new Bus('Cthulhu', 'cthulhu.jpg');
+new Bus('Dog-duck', 'dog-duck.jpg');
+new Bus('Dragon', 'dragon.jpg');
+new Bus('Pet-sweep', 'pet-sweep.jpg');
+new Bus('Pen', 'pen.jpg');
+new Bus('Scissors', 'scissors.jpg');
+new Bus('Shark', 'shark.jpg');
+new Bus('Sweep', 'sweep.png');
+new Bus('Tauntaun', 'tauntaun.jpg');
+new Bus('Unicorn', 'unicorn.jpg');
+new Bus('Water-can', 'water-can.jpg');
+new Bus('Wine-glass', 'wine-glass.jpg');
 
 
 let leftIndex;
 let centerIndex;
 let rightIndex;
- function renderThreeImages(){
-     leftIndex = randomIndex();
-     centerIndex = randomIndex();
-     rightIndex = randomIndex();
+let arrNew = [];
 
-     
 
-     while (leftIndex === centerIndex || leftIndex === rightIndex || centerIndex === rightIndex){
+function renderThreeImages() {
+    leftIndex = randomIndex();
+    centerIndex = randomIndex();
+    rightIndex = randomIndex();
+
+
+
+    while (leftIndex === centerIndex || leftIndex === rightIndex || centerIndex === rightIndex || arrNew.includes(leftIndex) || arrNew.includes(centerIndex) || arrNew.includes(rightIndex)) {
         leftIndex = randomIndex();
         centerIndex = randomIndex();
-     }
-
-     leftImageElement.src = Bus.arr[leftIndex].source;
-     centerImageElement.src = Bus.arr[centerIndex].source;
-     rightImageElement.src = Bus.arr[rightIndex].source;
+        rightIndex = randomIndex();
     }
- 
+    console.log(arrNew);
+    arrNew = [];
+    arrNew.push(leftIndex, centerIndex, rightIndex)
 
- renderThreeImages();
+    leftImageElement.src = Bus.arr[leftIndex].source;
+    centerImageElement.src = Bus.arr[centerIndex].source;
+    rightImageElement.src = Bus.arr[rightIndex].source;
 
- sectionElement.addEventListener('click', handleClick);
+}
 
- function handleClick(event){
-     counter ++
+renderThreeImages();
 
-     if(maxAttempts >= counter){
-         if(event.target.id === 'left'){
-             Bus.arr[leftIndex].votes++;
-           
-         }else if (event.target.id === 'center'){
+
+
+sectionElement.addEventListener('click', handleClick);
+
+function handleClick(event) {
+    counter++;
+
+    if (maxAttempts >= counter) {
+        if (event.target.id === 'left') {
+            Bus.arr[leftIndex].votes++;
+
+        } else if (event.target.id === 'center') {
             Bus.arr[centerIndex].votes++;
-          
-     }else if (event.target.id === 'right'){
-        Bus.arr[rightIndex].votes++;
-    
-     }
-     Bus.arr[leftIndex].shown++;
-     Bus.arr[centerIndex].shown++;
-     Bus.arr[rightIndex].shown++;
-  
 
-    renderThreeImages();
 
-        }else{
+        } else if (event.target.id === 'right') {
+            Bus.arr[rightIndex].votes++;
 
-     renderList(); 
- }
+        } else {
+            counter--;
+            return
+        }
+
+        Bus.arr[leftIndex].shown++;
+        Bus.arr[centerIndex].shown++;
+        Bus.arr[rightIndex].shown++;
+
+        renderThreeImages();
+
+
+    } else {
+
+        buttonElement.addEventListener('click', handlebutton);
+        sectionElement.removeEventListener('click', handleClick);
+    }
 }
 
 
-function renderList(){
-    let newBus = document.getElementById('button');
-    newBus.addEventListener('click', handlebutton);
-    function handlebutton(event){
+
+function handlebutton(event) {
+    renderList();
+    charts();
+    buttonElement.removeEventListener('click', handlebutton);
+
+          
+    
+
+}
+
+
+function renderList() {
 
     let ul = document.getElementById('unList');
-    for(let x = 0 ; x < Bus.arr.length; x++){
+    for (let x = 0; x < Bus.arr.length; x++) {
+        arrOfvotes.push(Bus.arr[x].votes);
+        arrOfshown.push(Bus.arr[x].shown);
         let li = document.createElement('li');
         ul.appendChild(li);
-        li.textContent = `${Bus.arr[x].name} had ${Bus.arr[x].votes} votes, and was seen ${Bus.arr[x].shown} times.` 
+        li.textContent = `${Bus.arr[x].name} had ${Bus.arr[x].votes} votes, and was seen ${Bus.arr[x].shown} times.`
+
     }
-    newBus.removeEventListener('click', handlebutton);
 }
-    sectionElement.removeEventListener('click',handleClick);
+
+
+function charts() {
+    let ctx = document.getElementById('myChart');
+
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: arrOfObjects,
+            datasets: [{
+                label: '# of Votes',
+                data: arrOfvotes,
+                backgroundColor: [
+                    'rgb(8, 8, 238)',
+
+                ],
+                borderColor: [
+                    'rgb(8, 8, 238)',
+
+                ],
+                borderWidth: .75
+            }, {
+                label: '# of shown',
+                data: arrOfshown,
+                backgroundColor: [
+                    'rgb(250, 167, 14)',
+
+                ],
+            }
+            ]
+        },
+
+    });
 }
+
+
 
