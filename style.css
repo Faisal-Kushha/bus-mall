@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+}
+
+header{
+    background-color: rgb(9, 211, 247);
+    height: 150px;
+}
+
+#logo1 {
+    float: left;
+    text-align: left;
+    height: 140px;
+    width: 200px;
+    left: 200px;
+}
+
+#logo2 {
+    float: right;
+    text-align: right;
+    height: 140px;
+    width: 200px;
+    left: 200px;
+    margin-top: -130px;
+} 
+
+h1{
+    font-size: 80px;
+    font-weight: bolder;
+    color: rgb(247, 245, 236);
+    font-weight: normal;
+    position: relative;
+    text-align: center;
+    right: 70px;
+    padding-top: 30px;
+    display: block;
+}
+
+header nav ul{
+    /* display: block;  */
+   
+    list-style-type: none;
+}
+
+header nav ul li {
+    display: inline-block;
+   padding-left: 130px;
+}
+
+header nav ul li a{
+    font-size: 23px;
+    font-weight: bolder;
+    color: rgb(247, 245, 236);
+    /* float: center; */
+    text-align: center;
+    padding: 13px;
+   
+}
+
+main {
+    width: 960px;
+    margin: 30px auto;
+}
+
+h2 {
+    font-size: 23px;
+    font-weight: bolder;
+    color: darkblue;
+}
+
+#left {
+    display: inline-block;
+    padding: 23px;
+}
+
+#center {
+    display: inline-block;
+    padding: 23px;
+}
+
+#right {
+    display: inline-block;
+    padding: 23px;
+}
+
+#button {
+    margin-left: 360px;
+    float: center;
+    width: 200px;
+    height: 50px;
+    background-color:rgb(9, 211, 247);
+    color: white;
+    font-size: 23px;
+    cursor: pointer;
+
+}
+#myChart {
+    height: 123px;
+    width: 350px;
+}
