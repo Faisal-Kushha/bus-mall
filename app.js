@@ -116,12 +116,27 @@ function handleClick(event) {
     }
 }
 
+function save(){
+   
+    let conArr = JSON.stringify(Bus.arr);
+    localStorage.setItem ("Bus", conArr);
+}
 
+function load(){
+    let data = localStorage.getItem ("Bus");
+    let  parseData = JSON.parse(data)
+    if (parseData){
+        
+        Bus.arr = parseData;
+    }
+}
+load();
 
 function handlebutton(event) {
     renderList();
     charts();
     buttonElement.removeEventListener('click', handlebutton);
+    save();
 
           
     
