@@ -1,21 +1,22 @@
 'use strict';
-
+// Using this function to calculate and produce a random image.
 function randomIndex() {
     return Math.floor(Math.random() * Bus.arr.length);
 }
-
+// Getting elements by Id.
 let sectionElement = document.getElementById('one');
 let buttonElement = document.getElementById('button');
 let leftImageElement = document.getElementById('left');
 let centerImageElement = document.getElementById('center');
 let rightImageElement = document.getElementById('right');
-
+//Declaring a variables.
 let maxAttempts = 25;
 let counter = 0;
+//An empty arrays that will hold the names, votes and the showing times for each image
 let arrOfObjects = [];
 let arrOfvotes = [];
 let arrOfshown = [];
-
+// The Constructor
 function Bus(name, source) {
     this.name = name;
     this.source = source;
@@ -27,7 +28,7 @@ function Bus(name, source) {
 
 }
 Bus.arr = [];
-
+//  Creating a new objects.
 new Bus('Bag', 'bag.jpg');
 new Bus('Banana', 'banana.jpg');
 new Bus('Bathroom', 'bathroom.jpg');
@@ -48,13 +49,13 @@ new Bus('Unicorn', 'unicorn.jpg');
 new Bus('Water-can', 'water-can.jpg');
 new Bus('Wine-glass', 'wine-glass.jpg');
 
-
+// Declaring and assigning variables.
 let leftIndex;
 let centerIndex;
 let rightIndex;
 let arrNew = [];
 
-
+// This function is used to render a three random images without duplicate an image in the same attempt and without duplicate the same images in next attempt. 
 function renderThreeImages() {
     leftIndex = randomIndex();
     centerIndex = randomIndex();
@@ -80,7 +81,7 @@ function renderThreeImages() {
 renderThreeImages();
 
 
-
+// Adding event listener to help in counting the votes and number of shown times for each image.
 sectionElement.addEventListener('click', handleClick);
 
 function handleClick(event) {
@@ -115,7 +116,7 @@ function handleClick(event) {
         sectionElement.removeEventListener('click', handleClick);
     }
 }
-
+// Using the local storage to save the data and load it.
 function save(){
    
     let conArr = JSON.stringify(Bus.arr);
@@ -131,7 +132,7 @@ function load(){
     }
 }
 load();
-
+// Using an event listener for the button that will present the results once it been clicked.
 function handlebutton(event) {
     renderList();
     charts();
@@ -143,7 +144,7 @@ function handlebutton(event) {
 
 }
 
-
+//This function is used to present the results below the images, once the voting is done. 
 function renderList() {
 
     let ul = document.getElementById('unList');
@@ -157,7 +158,7 @@ function renderList() {
     }
 }
 
-
+//This function is used to present the results in a chart. 
 function charts() {
     let ctx = document.getElementById('myChart');
 

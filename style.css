@@ -31,27 +31,27 @@ h1{
     font-weight: normal;
     position: relative;
     text-align: center;
-    right: 70px;
+    right: 130px;
     padding-top: 30px;
     display: block;
+    font-family: 'Zen Tokyo Zoo', cursive;
 }
 
 header nav ul{
-    /* display: block;  */
    
     list-style-type: none;
 }
 
 header nav ul li {
     display: inline-block;
-   padding-left: 130px;
+   padding-left: 119px;
+   
 }
 
 header nav ul li a{
     font-size: 23px;
     font-weight: bolder;
     color: rgb(247, 245, 236);
-    /* float: center; */
     text-align: center;
     padding: 13px;
    
@@ -60,27 +60,34 @@ header nav ul li a{
 main {
     width: 960px;
     margin: 30px auto;
+    
 }
 
 h2 {
-    font-size: 23px;
+    font-size: 50px;
     font-weight: bolder;
     color: darkblue;
+    text-align: center;
+    padding: 23px;
+    font-family: 'Dancing Script', cursive;
 }
 
 #left {
     display: inline-block;
     padding: 23px;
+    border: rgb(126, 11, 11) solid 3px;
 }
 
 #center {
     display: inline-block;
     padding: 23px;
+    border: orange solid 3px;
 }
 
 #right {
     display: inline-block;
     padding: 23px;
+    border: green solid 3px;
 }
 
 #button {
@@ -92,9 +99,28 @@ h2 {
     color: white;
     font-size: 23px;
     cursor: pointer;
+    margin-top: 30px;
 
+}
+
+#unList {
+    font-size: 35px;
+    font-family: 'Dancing Script', cursive;
+    color:rgb(17, 32, 165);
+    text-align: center;
+    padding: 30px;
+    
 }
 #myChart {
     height: 123px;
     width: 350px;
+    
+}
+
+footer {
+    background-color: rgb(9, 211, 247);
+    height: 100px;
+    text-align: center;
+    color: white;
+    font-size: 23px;
 }
